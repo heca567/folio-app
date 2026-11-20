@@ -1,0 +1,164 @@
+{
+  "entities": {
+    "Folder": {
+      "title": "Folder",
+      "description": "Proyecto o carpeta editorial en Firestore que agrupa manuscritos de un usuario.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Identificador único del proyecto."
+        },
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "UID del propietario autenticado en Firebase Auth."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "description": "Nombre del proyecto."
+        },
+        "color": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "description": "Color de acento visual del proyecto."
+        },
+        "icon": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "description": "Identificador de icono del proyecto."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Marca temporal de creación asignada por el servidor."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Marca temporal de última actualización asignada por el servidor."
+        }
+      },
+      "required": ["id", "userId", "name", "color", "icon", "createdAt", "updatedAt"]
+    },
+    "Note": {
+      "title": "Note",
+      "description": "Manuscrito o nota en Markdown almacenada en Firestore y asociada opcionalmente a un proyecto.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Identificador único de la nota."
+        },
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "UID del propietario autenticado."
+        },
+        "folderId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Identificador del proyecto al que pertenece (o null si no está asignada)."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "Título del manuscrito."
+        },
+        "slug": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "Slug normalizado del título."
+        },
+        "content": {
+          "type": "string",
+          "maxLength": 500000,
+          "description": "Contenido completo en Markdown."
+        },
+        "excerpt": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "Extracto de vista previa."
+        },
+        "stage": {
+          "type": "string",
+          "enum": ["SEED", "DRAFT", "REVISION", "POLISHED"],
+          "description": "Etapa del flujo editorial."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Lista acotada de hasta 20 etiquetas."
+        },
+        "isPinned": {
+          "type": "boolean",
+          "description": "Indica si la nota está fijada."
+        },
+        "isArchived": {
+          "type": "boolean",
+          "description": "Indica si la nota está archivada."
+        },
+        "color": {
+          "type": "string",
+          "maxLength": 32,
+          "description": "Color opcional de la nota."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Marca temporal de creación asignada por el servidor."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Marca temporal de actualización asignada por el servidor."
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "folderId",
+        "title",
+        "slug",
+        "content",
+        "excerpt",
+        "stage",
+        "tags",
+        "isPinned",
+        "isArchived",
+        "color",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/folders/{folderId}": {
+      "schema": {
+        "$ref": "#/entities/Folder"
+      },
+      "description": "Proyectos (carpetas) privados pertenecientes a cada usuario."
+    },
+    "/notes/{noteId}": {
+      "schema": {
+        "$ref": "#/entities/Note"
+      },
+      "description": "Manuscritos privados en Markdown pertenecientes a cada usuario y vinculados opcionalmente a un proyecto."
+    }
+  }
+}

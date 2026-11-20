@@ -1,0 +1,6 @@
+{
+  "name": "Folio — Estudio de Escritura Creativa",
+  "description": "PWA Offline-First de escritura creativa con arquitectura hexagonal, flujo editorial por etapas y sincronización Markdown.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

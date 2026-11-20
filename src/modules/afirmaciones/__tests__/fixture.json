@@ -1,0 +1,208 @@
+{
+  "afirmaciones": [
+    {
+      "id": "A001",
+      "texto": "El módulo debe aceptar un documento JSON pegado directamente sin requerir carga de archivos.",
+      "tipo": "requisito",
+      "origen": "usuario",
+      "estado": "vigente",
+      "fuentes": ["MSG-01"],
+      "evolucion": {
+        "tipo": "origen",
+        "antecedentes": []
+      }
+    },
+    {
+      "id": "A002",
+      "texto": "La validación estructural debe ejecutarse mediante funciones puras separadas de React.",
+      "tipo": "arquitectura",
+      "origen": "asistente",
+      "estado": "vigente",
+      "fuentes": ["MSG-02", "MSG-03"],
+      "evolucion": {
+        "tipo": "derivacion",
+        "antecedentes": ["A001"]
+      }
+    },
+    {
+      "id": "A003",
+      "texto": "Si el JSON pegado contiene errores de sintaxis o de esquema, no deben borrarse las afirmaciones ya cargadas.",
+      "tipo": "restriccion",
+      "origen": "usuario",
+      "estado": "vigente",
+      "fuentes": ["MSG-04"],
+      "evolucion": {
+        "tipo": "origen",
+        "antecedentes": []
+      }
+    },
+    {
+      "id": "A004",
+      "texto": "Cada afirmación debe conservar su texto original comprensible sin contexto externo.",
+      "tipo": "principio",
+      "origen": "usuario",
+      "estado": "vigente",
+      "fuentes": ["MSG-05", "MSG-06"],
+      "evolucion": {
+        "tipo": "origen",
+        "antecedentes": []
+      }
+    },
+    {
+      "id": "A005",
+      "texto": "Las opiniones del asistente no deben convertirse automáticamente en decisiones del usuario.",
+      "tipo": "restriccion",
+      "origen": "usuario",
+      "estado": "vigente",
+      "fuentes": ["MSG-07"],
+      "evolucion": {
+        "tipo": "refinamiento",
+        "antecedentes": ["A004"]
+      }
+    },
+    {
+      "id": "A006",
+      "texto": "En la primera versión se propuso usar un reducer global para coordinar los filtros.",
+      "tipo": "propuesta",
+      "origen": "asistente",
+      "estado": "descartada",
+      "fuentes": ["MSG-08"],
+      "evolucion": {
+        "tipo": "origen",
+        "antecedentes": []
+      }
+    },
+    {
+      "id": "A007",
+      "texto": "El estado de Page.tsx se gestionará con useState en lugar de introducir un reducer innecesario.",
+      "tipo": "decision",
+      "origen": "usuario",
+      "estado": "vigente",
+      "fuentes": ["MSG-09"],
+      "evolucion": {
+        "tipo": "reemplazo",
+        "antecedentes": ["A006"]
+      }
+    },
+    {
+      "id": "A008",
+      "texto": "Los filtros por tipo, origen, estado y tipo de evolución deben funcionar tanto de forma aislada como combinada.",
+      "tipo": "requisito",
+      "origen": "usuario",
+      "estado": "vigente",
+      "fuentes": ["MSG-10", "MSG-11"],
+      "evolucion": {
+        "tipo": "derivacion",
+        "antecedentes": ["A002"]
+      }
+    },
+    {
+      "id": "A009",
+      "texto": "Las relaciones de antecedentes y sucesoras solo pueden inferirse desde los identificadores declarados explícitamente.",
+      "tipo": "restriccion",
+      "origen": "usuario",
+      "estado": "vigente",
+      "fuentes": ["MSG-12"],
+      "evolucion": {
+        "tipo": "refinamiento",
+        "antecedentes": ["A004"]
+      }
+    },
+    {
+      "id": "A010",
+      "texto": "Los campos tipo, estado y evolucion.tipo se validan como strings no vacíos para mantener flexibilidad documental.",
+      "tipo": "decision",
+      "origen": "usuario",
+      "estado": "vigente",
+      "fuentes": ["MSG-13"],
+      "evolucion": {
+        "tipo": "refinamiento",
+        "antecedentes": ["A002"]
+      }
+    },
+    {
+      "id": "A011",
+      "texto": "La navegación hacia el explorador se expondrá en una ruta dedicada sin rediseñar el estudio principal.",
+      "tipo": "decision",
+      "origen": "usuario",
+      "estado": "vigente",
+      "fuentes": ["MSG-14", "MSG-15"],
+      "evolucion": {
+        "tipo": "derivacion",
+        "antecedentes": ["A007"]
+      }
+    },
+    {
+      "id": "A012",
+      "texto": "Se evaluó incorporar búsqueda semántica con embeddings en la barra de búsqueda.",
+      "tipo": "propuesta",
+      "origen": "asistente",
+      "estado": "descartada",
+      "fuentes": ["MSG-16"],
+      "evolucion": {
+        "tipo": "origen",
+        "antecedentes": []
+      }
+    },
+    {
+      "id": "A013",
+      "texto": "La búsqueda de la primera versión se limita a coincidencia textual sobre id y texto sin embeddings ni IA.",
+      "tipo": "decision",
+      "origen": "usuario",
+      "estado": "vigente",
+      "fuentes": ["MSG-17"],
+      "evolucion": {
+        "tipo": "reemplazo",
+        "antecedentes": ["A012", "A008"]
+      }
+    },
+    {
+      "id": "A014",
+      "texto": "Sin trazabilidad explícita de fuentes y antecedentes, las conversaciones largas tienden a acumular entropía conceptual.",
+      "tipo": "observacion",
+      "origen": "asistente",
+      "estado": "en_revision",
+      "fuentes": ["MSG-18", "MSG-19", "MSG-20"],
+      "evolucion": {
+        "tipo": "sintesis",
+        "antecedentes": ["A004", "A009"]
+      }
+    },
+    {
+      "id": "A015",
+      "texto": "El panel de detalle debe listar todas las fuentes asociadas a la afirmación seleccionada sin truncarlas.",
+      "tipo": "requisito",
+      "origen": "usuario",
+      "estado": "vigente",
+      "fuentes": ["MSG-21", "MSG-22"],
+      "evolucion": {
+        "tipo": "derivacion",
+        "antecedentes": ["A014"]
+      }
+    },
+    {
+      "id": "A016",
+      "texto": "La interfaz conserva el texto pegado en el área de edición para permitir correcciones incrementales.",
+      "tipo": "requisito",
+      "origen": "usuario",
+      "estado": "vigente",
+      "fuentes": ["MSG-23"],
+      "evolucion": {
+        "tipo": "refinamiento",
+        "antecedentes": ["A003"]
+      }
+    },
+    {
+      "id": "A017",
+      "texto": "Las pruebas unitarias verifican validación, filtrado y resolución de relaciones sin montar componentes React.",
+      "tipo": "criterio",
+      "origen": "asistente",
+      "estado": "vigente",
+      "fuentes": ["MSG-24", "MSG-25"],
+      "evolucion": {
+        "tipo": "sintesis",
+        "antecedentes": ["A002", "A008", "A009"]
+      }
+    }
+  ]
+}
