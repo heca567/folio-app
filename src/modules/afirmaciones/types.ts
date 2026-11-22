@@ -1,4 +1,4 @@
-export type OrigenAfirmacion = 'usuario' | 'asistente';
+export type OrigenAfirmacion = 'usuario' | 'asistente' | 'tercero' | 'compartido';
 
 export interface EvolucionAfirmacion {
   readonly tipo: string;
@@ -10,6 +10,7 @@ export interface Afirmacion {
   readonly texto: string;
   readonly tipo: string;
   readonly origen: OrigenAfirmacion;
+  readonly proyecto?: string | null;
   readonly estado: string;
   readonly fuentes: readonly string[];
   readonly evolucion: EvolucionAfirmacion;

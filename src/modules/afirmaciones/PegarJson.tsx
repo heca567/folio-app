@@ -237,7 +237,7 @@ export const PegarJson: React.FC<PegarJsonProps> = ({
           </div>
         )}
 
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-end gap-2">
           <button
             type="button"
             onClick={handleCopyPrompt}

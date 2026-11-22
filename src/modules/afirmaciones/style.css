@@ -1,6 +1,15 @@
 .afirmaciones-shell {
   background-color: #f6f5f0;
   color: #18181b;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.afirmaciones-shell .font-serif {
+  font-family: 'Newsreader', Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+.afirmaciones-shell .font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 .afirmaciones-scroll::-webkit-scrollbar {

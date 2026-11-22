@@ -84,3 +84,63 @@ test('rechaza documentos sin arreglo afirmaciones, orígenes inválidos o ids du
     assert.ok(idDuplicado.errores.some((err) => err.includes('duplicado')));
   }
 });
+
+test('acepta los orígenes tercero y compartido', () => {
+  const resultado = parsearYValidarAfirmaciones(
+    JSON.stringify({
+      afirmaciones: [
+        {
+          id: 'A001',
+          texto: 'Una afirmación citada.',
+          tipo: 'observacion',
+          origen: 'tercero',
+          estado: 'vigente',
+          fuentes: [],
+          evolucion: { tipo: 'original', antecedentes: [] },
+        },
+        {
+          id: 'A002',
+          texto: 'Una conclusión compartida.',
+          tipo: 'decision',
+          origen: 'compartido',
+          estado: 'vigente',
+          fuentes: [],
+          evolucion: { tipo: 'consolidacion', antecedentes: ['A001'] },
+        },
+      ],
+    })
+  );
+
+  assert.equal(resultado.ok, true);
+  if (resultado.ok) {
+    assert.deepEqual(
+      resultado.afirmaciones.map((item) => item.origen),
+      ['tercero', 'compartido']
+    );
+  }
+});
+
+test('preserva el ID del proyecto sin cambiar el origen de la afirmación', () => {
+  const resultado = parsearYValidarAfirmaciones(
+    JSON.stringify({
+      afirmaciones: [
+        {
+          id: 'A001',
+          texto: 'Una afirmación asignada a un proyecto.',
+          tipo: 'requisito',
+          origen: 'usuario',
+          proyecto: 'folder-123',
+          estado: 'vigente',
+          fuentes: [],
+          evolucion: { tipo: 'original', antecedentes: [] },
+        },
+      ],
+    })
+  );
+
+  assert.equal(resultado.ok, true);
+  if (resultado.ok) {
+    assert.equal(resultado.afirmaciones[0]?.proyecto, 'folder-123');
+    assert.equal(resultado.afirmaciones[0]?.origen, 'usuario');
+  }
+});
